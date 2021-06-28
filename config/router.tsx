@@ -1,12 +1,16 @@
 export const menus = [
   { path: '/', redirect: 'index' },
   {
-    title: '用户管理',
+    title: '首页',
     path: '/index',
-    component: '@/pages/index.tsx',
+    icon: 'icon-dashboard',
+    component: '@/pages/home',
     children: [],
   },
-  { title: '测试', path: '/test', component: '@/pages/test' },
+  { title: '个人文章', path: '/people', component: '@/pages/people' },
+  { title: '学习链接', path: '/study', component: '@/pages/study' },
+  { title: '微前端', path: '/test', component: '@/pages/test' },
+  { title: '联系', path: '/contact', component: '@/pages/contact' },
 ];
 
 export default [

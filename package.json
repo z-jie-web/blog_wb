@@ -23,6 +23,7 @@
     "@ant-design/pro-layout": "^6.5.0",
     "@umijs/preset-react": "1.x",
     "lodash": "^4.17.21",
+    "swiper": "^6.7.1",
     "umi": "^3.4.25"
   },
   "devDependencies": {

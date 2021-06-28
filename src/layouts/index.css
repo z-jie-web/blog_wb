@@ -1,0 +1,26 @@
+.main :global {
+  width: 80%;
+  height: 100vh;
+  margin: 0 auto;
+}
+.main :global .ant-layout-content {
+  background-color: #bdb5b5;
+}
+.main :global .ant-layout-header {
+  line-height: 48px;
+  height: 48px;
+  background-image: url(https://cdn.pixabay.com/photo/2015/04/02/08/13/universe-703522__340.jpg);
+}
+.photo {
+  color: rgba(255, 255, 255, 0.65);
+}
+.photo img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+.header :global {
+  float: right;
+  background: none !important;
+}
