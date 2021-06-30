@@ -1,0 +1,10 @@
+.card :global {
+  border-radius: 12px;
+}
+.card :global .ant-card-head-title {
+  font-weight: 520;
+  font-size: 16px;
+}
+.card :global .ant-card-extra {
+  cursor: pointer;
+}

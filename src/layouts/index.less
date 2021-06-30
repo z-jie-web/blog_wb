@@ -3,14 +3,23 @@
     width: 80%;
     height: 100vh;
     margin: 0 auto;
-  .ant-layout-content{
-    background-color: rgb(189, 181, 181,0.65);
-
-  }
-  .ant-layout-header {
+    .ant-layout-content {
+      padding: 16px;
+      // background-color: rgb(189, 181, 181, 0.65);
+      background-image: linear-gradient(to right, #30cfd0 0%, #330867 100%);
+      overflow-y: auto;
+      ::-webkit-scrollbar {
+        display: none; /* Chrome Safari */
+      }
+      scrollbar-width: none; /* firefox */
+      -ms-overflow-style: none; /* IE 10+ */
+    }
+    .ant-layout-header {
       line-height: 48px;
       height: 48px;
-      background-image: url(https://cdn.pixabay.com/photo/2015/04/02/08/13/universe-703522__340.jpg);
+      // background-image: url(https://cdn.pixabay.com/photo/2015/04/02/08/13/universe-703522__340.jpg);
+      background-image: linear-gradient(to right, #30cfd0 0%, #330867 100%);
+      // border-bottom: 2px solid #03a9f4;
     }
   }
 }
@@ -29,5 +38,11 @@
   :global {
     float: right;
     background: none !important;
+    .ant-menu-item-selected,
+    .ant-menu-item:hover {
+      background-color: none !important;
+      background: linear-gradient(-90deg, #29bdd9 0%, #276ace 100%);
+      border-radius: 20px;
+    }
   }
 }

@@ -1,0 +1,14 @@
+.pagination :global {
+  text-align: center;
+  margin-top: 16px;
+}
+.pagination :global .ant-pagination-item-link,
+.pagination :global .ant-pagination-item {
+  border-radius: 12px;
+  width: 48px;
+  height: 32px;
+  border: none;
+}
+.pagination :global .ant-pagination-item-active {
+  background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%);
+}

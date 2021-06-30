@@ -4,12 +4,22 @@
   margin: 0 auto;
 }
 .main :global .ant-layout-content {
-  background-color: #bdb5b5;
+  padding: 16px;
+  background-image: linear-gradient(to right, #30cfd0 0%, #330867 100%);
+  overflow-y: auto;
+  scrollbar-width: none;
+  /* firefox */
+  -ms-overflow-style: none;
+  /* IE 10+ */
+}
+.main :global .ant-layout-content ::-webkit-scrollbar {
+  display: none;
+  /* Chrome Safari */
 }
 .main :global .ant-layout-header {
   line-height: 48px;
   height: 48px;
-  background-image: url(https://cdn.pixabay.com/photo/2015/04/02/08/13/universe-703522__340.jpg);
+  background-image: linear-gradient(to right, #30cfd0 0%, #330867 100%);
 }
 .photo {
   color: rgba(255, 255, 255, 0.65);
@@ -23,4 +33,10 @@
 .header :global {
   float: right;
   background: none !important;
+}
+.header :global .ant-menu-item-selected,
+.header :global .ant-menu-item:hover {
+  background-color: none !important;
+  background: linear-gradient(-90deg, #29bdd9 0%, #276ace 100%);
+  border-radius: 20px;
 }
