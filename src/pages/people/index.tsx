@@ -6,12 +6,14 @@ import Pagination from '@/components/Pagination';
 import data from '@/utils/constant';
 import LabelItem from '@/components/LabelItem';
 import ArticleItem, { IData } from '@/components/ArticleItem';
+import AddModel from './addModel';
 import styles from './index.less';
 
 const Index = () => {
   const { Search } = Input;
   const [active, setActive] = useState('1');
   const [page, setPage] = useState(1);
+  const [visible, setVisible] = useState(false);
   const { labelData, articleData } = data;
   const title = labelData.find((item) => item.id === active)?.title;
 
@@ -23,9 +25,17 @@ const Index = () => {
     setPage(page);
   };
 
-  const handleAdd=()=>{
-    console.log('add')
-  }
+  const handleAdd = () => {
+    setVisible(true);
+  };
+
+  const handleCancel = () => {
+    setVisible(false);
+  };
+
+  const handleOk = () => {
+    console.log('add');
+  };
 
   const renderSearch = (
     <Search placeholder="请输入关键字" onSearch={handleSearch} enterButton />
@@ -66,6 +76,11 @@ const Index = () => {
           <Pagination total={50} current={page} onChange={handlePageChange} />
         </Col>
       </Row>
+      <AddModel
+        visible={visible}
+        handleCancel={handleCancel}
+        handleOk={handleOk}
+      />
     </div>
   );
 };
