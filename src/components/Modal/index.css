@@ -1,0 +1,9 @@
+.modal :global .ant-modal-content {
+  border-radius: 12px;
+}
+.modal :global .ant-modal-header {
+  border-radius: 12px 12px 0 0;
+}
+.modal :global .ant-btn {
+  border-radius: 12px;
+}

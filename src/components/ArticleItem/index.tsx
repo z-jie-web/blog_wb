@@ -1,10 +1,13 @@
 import { linkTo } from '@/utils/helps';
+import dayjs from 'dayjs';
 import styles from './index.less';
 
 export interface IData {
-  src?: string;
+  cover?: string;
   content: string;
-  id: string;
+  description: string;
+  _id: string;
+  date: string;
 }
 
 interface IProps {
@@ -12,23 +15,30 @@ interface IProps {
 }
 
 const Index = (props: IProps) => {
-  const { src, content, id } = props.item;
-  console.log(id, 'ssssss');
+  console.log(props, 'propsprops');
+  const { cover, description, _id, date } = props.item;
+  console.log(_id);
+  console.log(dayjs(date).format('YYYY-MM-DD HH:mm:ss'));
 
   const handleClick = (id: string) => {
-    linkTo(`/people/detail?id=${id}`);
+    linkTo(`/people/detail?id=${_id}`);
   };
 
   const currentData = new Date();
 
   return (
     <div
-      onClick={() => handleClick(id)}
+      onClick={() => handleClick(_id)}
       key={`id${currentData}`}
       className={styles.displayItem}
     >
-      <img className={styles.img} src={src} alt="" />
-      <div className={styles.content}>{content}</div>
+      <img className={styles.img} src={cover} alt="" />
+      <div>
+        <div className={styles.content}>{description}</div>
+        <div className={styles.footerContent}>
+          {dayjs(date).format('YYYY-MM-DD HH:mm:ss')}
+        </div>
+      </div>
     </div>
   );
 };
