@@ -13,7 +13,8 @@ import styles from './index.less';
 interface IRes {
   message: string;
   status: number;
-  result: [IData];
+  result: Array<IData>;
+  total: number;
 }
 
 const page = {
@@ -26,26 +27,29 @@ const Index = () => {
   const [active, setActive] = useState('1');
   const [dataList, setDataList] = useState([]);
   const [current, setPage] = useState(1);
+  const [total, setTotal] = useState(0);
   const [visible, setVisible] = useState(false);
   const { labelData, articleData } = data;
   const title = labelData.find((item) => item.id === active)?.title;
 
-  const getDataList = () => {
-    get('/people', { active, ...page }).then((res: IRes) => {
-      setDataList(res.result);
-    });
+  const getDataList = (params: object) => {
+    get('/people', { active, ...page, ...params }).then(
+      (res: IRes | unknown) => {
+        console.log(res, 'resres');
+        setDataList(res.result);
+        setTotal(res.total);
+      },
+    );
   };
 
   useEffect(() => {
-    getDataList();
+    getDataList({ current: 1 });
+    setPage(1);
   }, [active]);
-
-  const handleSearch = (params: string) => {
-    console.log(params, 'paramsparams');
-  };
 
   const handlePageChange = (current: number) => {
     setPage(current);
+    getDataList({ current });
   };
 
   const handleAdd = () => {
@@ -59,10 +63,6 @@ const Index = () => {
   const handleOk = () => {
     console.log('add');
   };
-
-  const renderSearch = (
-    <Search placeholder="请输入关键字" onSearch={handleSearch} enterButton />
-  );
 
   return (
     <div>
@@ -91,13 +91,14 @@ const Index = () => {
           </div>
         </Col>
         <Col span={20}>
-          <Card title={title} extra={renderSearch}>
+          <Card title={title}>
             {dataList.map((item: IData) => (
               <ArticleItem key={item._id} item={item} />
             ))}
           </Card>
           <Pagination
-            total={50}
+            total={total}
+            pageSize={page.pageSize}
             current={current}
             onChange={handlePageChange}
           />
