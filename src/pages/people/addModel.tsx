@@ -1,13 +1,15 @@
 import { useState } from 'react';
-import { Select, Form } from 'antd';
+import { Select, Form, Input } from 'antd';
 import Modal from '@/components/Modal';
 import data from '@/utils/constant';
+import { post } from '@/utils/request';
+import { peopleAdd } from '@/api/people';
 import BraftEditor from 'braft-editor';
 import 'braft-editor/dist/index.css';
 
 const { Option } = Select;
 const { labelData } = data;
-
+const { TextArea } = Input;
 interface IProps {
   visible: boolean;
   handleOk: () => void;
@@ -33,7 +35,13 @@ const Index = (props: IProps) => {
       .validateFields()
       .then((values) => {
         form.resetFields();
+        const htmlContent = editorState.toHTML();
+        // console.log(htmlContent);
         console.log(values, 'sssssssssss');
+        post(peopleAdd, { ...values, content: htmlContent }).then((res) => {
+          console.log(res, 'ssss ');
+        });
+        // console.log(values, 'sssssssssss');
         // onCreate(values);
       })
       .catch((info) => {
@@ -41,13 +49,8 @@ const Index = (props: IProps) => {
       });
     // Pressing ctrl + s when the editor has focus will execute this method
     // Before the editor content is submitted to the server, you can directly call editorState.toHTML () to get the HTML content
-    const htmlContent = editorState.toHTML();
-    console.log(htmlContent);
-    // const result = await saveEditorContent(htmlContent)
-  };
 
-  const handleSelectChange = (e) => {
-    console.log(e, 'sssssssssss');
+    // const result = await saveEditorContent(htmlContent)
   };
 
   return (
@@ -76,7 +79,6 @@ const Index = (props: IProps) => {
             style={{ width: '100%' }}
             placeholder="Please select"
             // defaultValue={['a10', 'c12']}
-            onChange={handleSelectChange}
           >
             {labelData.map((item) => (
               <Option value={item.id} key={item.id}>
@@ -84,6 +86,16 @@ const Index = (props: IProps) => {
               </Option>
             ))}
           </Select>
+        </Form.Item>
+        <Form.Item
+          label="描述"
+          name="description"
+          rules={[{ required: true, message: 'Please Input' }]}
+        >
+          <TextArea rows={2} placeholder="Please Input" />
+        </Form.Item>
+        <Form.Item label="封面地址" name="cover">
+          <Input placeholder="Please Input" />
         </Form.Item>
       </Form>
 

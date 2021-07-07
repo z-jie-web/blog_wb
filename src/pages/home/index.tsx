@@ -1,8 +1,10 @@
+import { useEffect } from 'react';
 import { Row, Col } from 'antd';
 import Card from '@/components/Card';
 import ArticleItem, { IData } from '@/components/ArticleItem';
 import data from '@/utils/constant';
-import {linkTo} from '@/utils/helps';
+import { linkTo } from '@/utils/helps';
+import { get } from '@/utils/request';
 import 'swiper/swiper.less';
 import Swiper from './swiper';
 import styles from './index.less';
@@ -10,9 +12,15 @@ import styles from './index.less';
 const Index = () => {
   const { articleData } = data;
 
-  const handleCheck=()=>{
-    linkTo('/people')
-  }
+  useEffect(() => {
+    get('/', '').then((res) => {
+      console.log(res, 'ssss ');
+    });
+  }, []);
+
+  const handleCheck = () => {
+    linkTo('/people');
+  };
 
   const renderExtra = () => {
     return <span onClick={handleCheck}>查看更多 {`>`}</span>;
