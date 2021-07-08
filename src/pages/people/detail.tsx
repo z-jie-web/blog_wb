@@ -1,16 +1,15 @@
 import { useState, useEffect } from 'react';
-import { Select, Form, Input } from 'antd';
+import { Select, Form, Input, Button } from 'antd';
 import Modal from '@/components/Modal';
 import data from '@/utils/constant';
 import { get } from '@/utils/request';
-import { peopleDetail } from '@/api/people';
+import { peopleDetail, peopleEdit } from '@/api/people';
 import BraftEditor from 'braft-editor';
-import styles from './index.less';
+import AddModel from './addModel';
 import 'braft-editor/dist/index.css';
+import 'braft-editor/dist/output.css';
+import styles from './index.less';
 
-const { Option } = Select;
-const { labelData } = data;
-const { TextArea } = Input;
 interface IProps {
   visible: boolean;
   handleOk: () => void;
@@ -19,24 +18,46 @@ interface IProps {
 
 const Index = (props: IProps) => {
   const [editorState, setEditorState] = useState(null);
+  const [values, setValues] = useState(null);
+  const [visible, setVisible] = useState(false);
   const { id } = props.location.query;
 
   useEffect(() => {
     get(peopleDetail, { id }).then((res) => {
-      console.log(res, 'resres');
       const content = BraftEditor.createEditorState(res.result[0].content);
       setEditorState(content);
+      setValues(res.result[0]);
     });
   }, []);
 
+  const handleAdd = () => {
+    setVisible(true);
+  };
+
+  const handleCancel = () => {
+    setVisible(false);
+  };
+
+  const handleOk = () => {
+    console.log('add');
+  };
+
   console.log(editorState?.toHTML(), 'editorState');
+  // console.log(editorState?.toHTML(), 'editorState');/
   return (
     <div className={styles.container}>
-      222{editorState?.toHTML()}
-      {/* <BraftEditor
-        value={editorState}
-     
-      /> */}
+      <Button onClick={handleAdd}>编辑</Button>
+
+      <div
+        className="braft-output-content"
+        dangerouslySetInnerHTML={{ __html: editorState?.toHTML() }}
+      ></div>
+      <AddModel
+        values={values}
+        visible={visible}
+        handleCancel={handleCancel}
+        handleOk={handleOk}
+      />
     </div>
   );
 };

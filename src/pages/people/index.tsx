@@ -22,7 +22,7 @@ interface IRes {
 
 const page = {
   current: 1,
-  pageSize: 2,
+  pageSize: 6,
 };
 
 const Index = () => {
