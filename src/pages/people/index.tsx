@@ -10,10 +10,13 @@ import ArticleItem, { IData } from '@/components/ArticleItem';
 import AddModel from './addModel';
 import styles from './index.less';
 
+interface ObjectOf<V> {
+  [_: string]: V;
+}
 interface IRes {
   message: string;
   status: number;
-  result: Array<IData>;
+  result: ObjectOf<IData>;
   total: number;
 }
 
@@ -28,18 +31,20 @@ const Index = () => {
   const [dataList, setDataList] = useState([]);
   const [current, setPage] = useState(1);
   const [total, setTotal] = useState(0);
+  const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
   const { labelData, articleData } = data;
   const title = labelData.find((item) => item.id === active)?.title;
 
   const getDataList = (params: object) => {
-    get('/people', { active, ...page, ...params }).then(
-      (res: IRes | unknown) => {
-        console.log(res, 'resres');
-        setDataList(res.result);
-        setTotal(res.total);
-      },
-    );
+    setLoading(true);
+    get('/people', { active, ...page, ...params }).then((res) => {
+      const _res = res as IRes;
+      console.log(res, 'resres');
+      setDataList(_res.result);
+      setTotal(_res.total);
+      setLoading(false);
+    });
   };
 
   useEffect(() => {
@@ -91,7 +96,7 @@ const Index = () => {
           </div>
         </Col>
         <Col span={20}>
-          <Card title={title}>
+          <Card title={title} loading={loading}>
             {dataList.map((item: IData) => (
               <ArticleItem key={item._id} item={item} />
             ))}

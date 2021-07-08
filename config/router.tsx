@@ -7,7 +7,18 @@ export const menus = [
     component: '@/pages/home',
     children: [],
   },
-  { title: '个人文章', path: '/people', component: '@/pages/people' },
+  {
+    title: '个人文章',
+    path: '/people',
+    routes: [
+      { path: '/', redirect: 'people' },
+      { path: '/people', component: '@/pages/people' },
+      {
+        path: '/people/detail',
+        component: '@/pages/people/detail',
+      },
+    ],
+  },
   { title: '学习链接', path: '/study', component: '@/pages/study' },
   { title: '微前端', path: '/test', component: '@/pages/test' },
   { title: '联系', path: '/contact', component: '@/pages/contact' },
