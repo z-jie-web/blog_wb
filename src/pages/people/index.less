@@ -5,10 +5,27 @@
 
 .container {
   box-sizing: border-box;
+  border-radius: 16px;
   max-width: 100%;
   min-height: 100%;
   margin: 0 auto;
   padding: 30px 20px;
   overflow: hidden;
   background-color: rgba(255, 255, 255, 0.65);
+}
+
+.detailTitle {
+  line-height: 48px;
+  font-size: 28px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.detailDate {
+  line-height: 24px;
+  margin-bottom: 24px;
+  a {
+    margin-left: 24px;
+  }
 }

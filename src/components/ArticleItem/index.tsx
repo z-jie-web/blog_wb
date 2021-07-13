@@ -1,3 +1,4 @@
+import { Card } from 'antd';
 import { linkTo } from '@/utils/helps';
 import dayjs from 'dayjs';
 import styles from './index.less';
@@ -27,19 +28,21 @@ const Index = (props: IProps) => {
   const currentData = new Date();
 
   return (
-    <div
-      onClick={() => handleClick(_id)}
-      key={`id${currentData}`}
-      className={styles.displayItem}
-    >
-      <img className={styles.img} src={cover} alt="" />
-      <div>
-        <div className={styles.content}>{description}</div>
-        <div className={styles.footerContent}>
-          {dayjs(date).format('YYYY-MM-DD HH:mm:ss')}
+    <Card.Grid className={styles.displayCard}>
+      <div
+        onClick={() => handleClick(_id)}
+        key={`id${currentData}`}
+        className={styles.displayItem}
+      >
+        <img className={styles.img} src={cover} alt="" />
+        <div className={styles.right}>
+          <div className={styles.content}>{description}</div>
+          <div className={styles.footerContent}>
+            {dayjs(date).format('YYYY-MM-DD HH:mm:ss')}
+          </div>
         </div>
       </div>
-    </div>
+    </Card.Grid>
   );
 };
 

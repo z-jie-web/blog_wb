@@ -4,6 +4,7 @@ import { PlusOutlined } from '@ant-design/icons';
 import Card from '@/components/Card';
 import Pagination from '@/components/Pagination';
 import data from '@/utils/constant';
+import QueueAnim from 'rc-queue-anim';
 import { get } from '@/utils/request';
 import LabelItem from '@/components/LabelItem';
 import ArticleItem, { IData } from '@/components/ArticleItem';
@@ -73,15 +74,17 @@ const Index = () => {
     <div>
       <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
         <Col span={4}>
-          <Card title="你感兴趣的标签">
-            {labelData.map((item) => (
-              <LabelItem
-                key={item.id}
-                setActive={setActive}
-                active={active}
-                item={item}
-              />
-            ))}
+          <Card title="标签选择">
+            <QueueAnim delay={300} className="queue-simple">
+              {labelData.map((item) => (
+                <LabelItem
+                  key={item.id}
+                  setActive={setActive}
+                  active={active}
+                  item={item}
+                />
+              ))}
+            </QueueAnim>
           </Card>
           <div className={styles.addButton}>
             <Button
@@ -97,9 +100,11 @@ const Index = () => {
         </Col>
         <Col span={20}>
           <Card title={title} loading={loading}>
-            {dataList.map((item: IData) => (
-              <ArticleItem key={item._id} item={item} />
-            ))}
+            <QueueAnim delay={300} className="queue-simple">
+              {dataList.map((item: IData) => (
+                <ArticleItem key={item._id} item={item} />
+              ))}
+            </QueueAnim>
           </Card>
           <Pagination
             total={total}
@@ -109,11 +114,7 @@ const Index = () => {
           />
         </Col>
       </Row>
-      <AddModel
-        visible={visible}
-        handleCancel={handleCancel}
-        handleOk={handleOk}
-      />
+      <AddModel visible={visible} handleCancel={handleCancel} />
     </div>
   );
 };

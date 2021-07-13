@@ -14,14 +14,13 @@ const { TextArea } = Input;
 interface IProps {
   visible: boolean;
   values?: IData | null;
-  handleOk: () => void;
-  handleCancel: () => void;
+  handleCancel: (params: any) => void;
 }
 
 const Index = (props: IProps) => {
   const [form] = Form.useForm();
   const [editorState, setEditorState] = useState(null);
-  const { visible, handleOk, handleCancel, values } = props;
+  const { visible, handleCancel, values } = props;
 
   useEffect(() => {
     setEditorState(BraftEditor.createEditorState(values?.content));
@@ -43,7 +42,7 @@ const Index = (props: IProps) => {
           content: htmlContent,
         }).then(() => {
           BraftEditor.createEditorState(null);
-          handleCancel();
+          handleCancel(values);
         });
       })
       .catch((info) => {
@@ -53,7 +52,7 @@ const Index = (props: IProps) => {
 
   return (
     <Modal
-      title="新增"
+      title={values ? '编辑' : '新增'}
       width={1080}
       visible={visible}
       onOk={submitContent}
