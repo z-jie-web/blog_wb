@@ -1,0 +1,16 @@
+.displayCard :global {
+  border: none;
+  margin-bottom: 24px;
+}
+.displayCard :global .ant-card-cover {
+  height: 200px;
+  overflow: hidden;
+  margin: 0;
+}
+.displayCard :global .ant-card-cover img {
+  width: 100%;
+  min-height: 200px;
+}
+.displayCard :global .ant-card-body {
+  background: #999;
+}

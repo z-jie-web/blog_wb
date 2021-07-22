@@ -62,7 +62,7 @@ const Index = (props: any) => {
       <Layout>
         <Content>
           <BackTop />
-          <div className={styles.content}> {props.children} </div>
+          <div className={styles.content}>{props.children}</div>
         </Content>
       </Layout>
     </Layout>

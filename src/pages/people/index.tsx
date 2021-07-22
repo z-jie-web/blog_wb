@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Row, Col, Input, Button, message } from 'antd';
+import { Row, Col, Input, Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
+import { isEmpty } from 'lodash'; // 引入JS工具库
 import Card from '@/components/Card';
+import Empty from '@/components/Empty';
 import Pagination from '@/components/Pagination';
 import data from '@/utils/constant';
 import QueueAnim from 'rc-queue-anim';
@@ -66,8 +68,17 @@ const Index = () => {
     setVisible(false);
   };
 
-  const handleOk = () => {
-    console.log('add');
+  const renderContent = () => {
+    if (!isEmpty(dataList)) {
+      return (
+        <QueueAnim delay={300} className="queue-simple">
+          {dataList.map((item: IData) => (
+            <ArticleItem key={item._id} item={item} />
+          ))}
+        </QueueAnim>
+      );
+    }
+    return <Empty />;
   };
 
   return (
@@ -100,18 +111,16 @@ const Index = () => {
         </Col>
         <Col span={20}>
           <Card title={title} loading={loading}>
-            <QueueAnim delay={300} className="queue-simple">
-              {dataList.map((item: IData) => (
-                <ArticleItem key={item._id} item={item} />
-              ))}
-            </QueueAnim>
+            {renderContent()}
           </Card>
-          <Pagination
-            total={total}
-            pageSize={page.pageSize}
-            current={current}
-            onChange={handlePageChange}
-          />
+          {!isEmpty(dataList) && (
+            <Pagination
+              total={total}
+              pageSize={page.pageSize}
+              current={current}
+              onChange={handlePageChange}
+            />
+          )}
         </Col>
       </Row>
       <AddModel visible={visible} handleCancel={handleCancel} />

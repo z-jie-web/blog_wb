@@ -3,6 +3,8 @@ import { linkTo } from '@/utils/helps';
 import dayjs from 'dayjs';
 import styles from './index.less';
 
+const { Meta } = Card;
+
 export interface IData {
   cover?: string;
   content: string;
@@ -25,21 +27,18 @@ const Index = (props: IProps) => {
   const currentData = new Date();
 
   return (
-    <Card.Grid className={styles.displayCard}>
-      <div
-        onClick={handleClick}
-        key={`id${currentData}`}
-        className={styles.displayItem}
-      >
-        <img className={styles.img} src={cover} alt="" />
-        <div className={styles.right}>
-          <div className={styles.content}>{description}</div>
-          <div className={styles.footerContent}>
-            {dayjs(date).format('YYYY-MM-DD HH:mm:ss')}
-          </div>
-        </div>
-      </div>
-    </Card.Grid>
+    <Card
+      hoverable
+      className={styles.displayCard}
+      cover={
+        <img
+          alt="example"
+          src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+        />
+      }
+    >
+      <Meta title="Europe Street beat" description="www.instagram.com" />
+    </Card>
   );
 };
 
